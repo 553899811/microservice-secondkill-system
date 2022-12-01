@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newbiegroup.secondkill.dao.WareItemStockMapper">
+    <resultMap id="BaseResultMap" type="com.newbiegroup.secondkill.entity.WareItemStock">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="stock" jdbcType="INTEGER" property="stock"/>
+        <result column="ware_item_id" jdbcType="BIGINT" property="wareItemId"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, stock, ware_item_id
+    </sql>
+    <update id="decreaseStock">
+        update ware_item_stock
+        set stock = stock - #{amount}
+        where ware_item_id = #{wareItemId}
+          and stock >= #{amount}
+    </update>
+    <update id="increaseStock">
+        update ware_item_stock
+        set stock = stock + #{amount}
+        where ware_item_id = #{wareItemId}
+    </update>
+</mapper>
