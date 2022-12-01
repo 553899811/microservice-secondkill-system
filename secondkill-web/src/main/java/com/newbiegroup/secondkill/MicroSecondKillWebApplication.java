@@ -1,5 +1,7 @@
 package com.newbiegroup.secondkill;
 
+import com.alibaba.nacos.api.config.annotation.NacosConfigurationProperties;
+import com.alibaba.nacos.spring.context.annotation.config.NacosPropertySource;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,14 +20,15 @@ import org.springframework.stereotype.Repository;
  */
 @SpringBootApplication(scanBasePackages = {"com.newbiegroup.secondkill"})
 @MapperScan(value = "com.newbiegroup.secondkill.dao", annotationClass = Repository.class)
-public class WebApplication extends SpringBootServletInitializer {
+@NacosPropertySource(dataId = "example", autoRefreshed = true)
+public class MicroSecondKillWebApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
-        SpringApplication.run(WebApplication.class);
+        SpringApplication.run(MicroSecondKillWebApplication.class);
     }
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(WebApplication.class);
+        return application.sources(MicroSecondKillWebApplication.class);
     }
 }
